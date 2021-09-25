@@ -5,6 +5,11 @@ RUN shards install
 RUN crystal build --release --link-flags="-static" src/server.cr
 
 FROM public.ecr.aws/ubuntu/ubuntu:18.04
+
+ENV http_proxy <http-proxy>
+ENV https_proxy <https-proxy>
+ENV no_proxy <no-proxy>
+
 RUN apt-get update &&\
     apt install -y curl jq bash python3 python3-pip &&\
     pip3 install awscli netaddr
